@@ -15,12 +15,14 @@ class CreatePeopleTable extends Migration
     {
         Schema::create('people', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_id');
             $table->string('name');
             $table->string('lastname');
-            $table->unsignedInteger('typeDocument');
+            $table->string('documentType', 3);
             $table->string('document');
             $table->string('phone');
             $table->string('email')->nullable();
+            $table->string('documentFile');
             $table->timestamps();
             $table->softDeletes();
         });
