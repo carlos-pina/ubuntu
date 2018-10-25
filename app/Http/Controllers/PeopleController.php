@@ -6,5 +6,13 @@ use Illuminate\Http\Request;
 
 class PeopleController extends Controller
 {
-    //
+  /**
+   * Show the personal data form.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function index()
+  {
+      return view('people');
+  }
 }

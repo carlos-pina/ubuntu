@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">Personal Data</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,7 +14,9 @@
                         </div>
                     @endif
 
-                    Now you can find a service or give one for everyone.
+                    <form method="POST" action="/profile">
+                        @csrf
+                    </form>
                 </div>
             </div>
         </div>
