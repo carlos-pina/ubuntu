@@ -19,4 +19,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/people', 'PeopleController@index')->name('people');
+Route::resource('people', 'PeopleController');

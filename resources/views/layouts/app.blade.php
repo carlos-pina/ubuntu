@@ -38,7 +38,11 @@
                               <a class="nav-link" href="{{ route('home') }}">Home</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="{{ route('people') }}">Personal Data</a>
+                            @if (Auth::user()->people)
+                              <a class="nav-link" href="{{ route('people.edit', Auth::user()->people) }}">Personal Data</a>
+                            @else
+                              <a class="nav-link" href="{{ route('people.create') }}">Personal Data</a>
+                            @endif
                           </li>
                       </ul>
                     @endauth
