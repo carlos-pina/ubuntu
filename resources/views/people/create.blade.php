@@ -20,16 +20,19 @@
                         <div class="form-group row">
                           <label for="name" class="col-sm-2 col-form-label">Name</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Name"/>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{ old('name') }}"/>
                             @if($errors->has('name'))
-                              <span class="help-block">{{ $errors->first('name') }}</span>
+                              <em class="help-block text-danger">{{ $errors->first('name') }}</em>
                             @endif
                           </div>
                         </div>
                         <div class="form-group row">
                           <label for="lastname" class="col-sm-2 col-form-label">Last Name</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name"/>
+                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name" value="{{ old('lastname') }}"/>
+                            @if($errors->has('lastname'))
+                              <em class="help-block text-danger">{{ $errors->first('lastname') }}</em>
+                            @endif
                           </div>
                         </div>
                         <div class="form-group row">
@@ -41,19 +44,25 @@
                         <div class="form-group row">
                           <label for="document" class="col-sm-2 col-form-label">Document</label>
                           <div class="col-sm-5">
-                            <input type="text" class="form-control" id="document" name="document" placeholder="Document"/>
+                            <input type="text" class="form-control" id="document" name="document" placeholder="Document" value="{{ old('document') }}"/>
+                            @if($errors->has('document'))
+                              <em class="help-block text-danger">{{ $errors->first('document') }}</em>
+                            @endif
                           </div>
                         </div>
                         <div class="form-group row">
                           <label for="phone" class="col-sm-2 col-form-label">Phone</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone"/>
+                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" value="{{ old('phone') }}"/>
+                            @if($errors->has('phone'))
+                              <em class="help-block text-danger">{{ $errors->first('phone') }}</em>
+                            @endif
                           </div>
                         </div>
                         <div class="form-group row">
                           <label for="email" class="col-sm-2 col-form-label">Email</label>
                           <div class="col-sm-10">
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email"/>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ old('email') }}"/>
                           </div>
                         </div>
                         <div class="form-group row">

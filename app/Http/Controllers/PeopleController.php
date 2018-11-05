@@ -36,7 +36,10 @@ class PeopleController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(),[
-          //put fields to be validated here
+            'name' => 'required',
+            'lastname' => 'required',
+            'document' => 'required',
+            'phone' => 'required'
         ]);
 
         $people = new People();
@@ -51,7 +54,7 @@ class PeopleController extends Controller
 
         $people->save();
 
-        return redirect('/');
+        return redirect('home');
     }
 
     /**
@@ -85,22 +88,25 @@ class PeopleController extends Controller
      */
     public function update(Request $request, People $people)
     {
-      $this->validate(request(),[
-        //put fields to be validated here
-      ]);
+        $this->validate(request(),[
+            'name' => 'required',
+            'lastname' => 'required',
+            'document' => 'required',
+            'phone' => 'required'
+        ]);
 
-      $people->user_id = $request['userid'];
-      $people->name = $request['name'];
-      $people->lastname = $request['lastname'];
-      $people->documentType = 1; //$request['documentType'];
-      $people->document = $request['document'];
-      $people->phone = $request['phone'];
-      $people->email = $request['email'];
-      $people->documentFile = $request['documentFile'];
+        $people->user_id = $request['userid'];
+        $people->name = $request['name'];
+        $people->lastname = $request['lastname'];
+        $people->documentType = 1; //$request['documentType'];
+        $people->document = $request['document'];
+        $people->phone = $request['phone'];
+        $people->email = $request['email'];
+        $people->documentFile = $request['documentFile'];
 
-      $people->save();
+        $people->save();
 
-      return redirect('/');
+        return redirect('home');
     }
 
     /**

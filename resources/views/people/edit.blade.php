@@ -23,7 +23,7 @@
                           <div class="col-sm-10">
                             <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{ $people->name }}"/>
                             @if($errors->has('name'))
-                              <span class="help-block">{{ $errors->first('name') }}</span>
+                              <em class="help-block text-danger">{{ $errors->first('name') }}</em>
                             @endif
                           </div>
                         </div>
@@ -31,6 +31,9 @@
                           <label for="lastname" class="col-sm-2 col-form-label">Last Name</label>
                           <div class="col-sm-10">
                             <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name" value="{{ $people->lastname }}"/>
+                            @if($errors->has('lastname'))
+                              <em class="help-block text-danger">{{ $errors->first('lastname') }}</em>
+                            @endif
                           </div>
                         </div>
                         <div class="form-group row">
@@ -43,12 +46,18 @@
                           <label for="document" class="col-sm-2 col-form-label">Document</label>
                           <div class="col-sm-5">
                             <input type="text" class="form-control" id="document" name="document" placeholder="Document" value="{{ $people->document }}"/>
+                            @if($errors->has('document'))
+                              <em class="help-block text-danger">{{ $errors->first('document') }}</em>
+                            @endif
                           </div>
                         </div>
                         <div class="form-group row">
                           <label for="phone" class="col-sm-2 col-form-label">Phone</label>
                           <div class="col-sm-10">
                             <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" value="{{ $people->phone }}"/>
+                            @if($errors->has('phone'))
+                              <em class="help-block text-danger">{{ $errors->first('phone') }}</em>
+                            @endif
                           </div>
                         </div>
                         <div class="form-group row">
