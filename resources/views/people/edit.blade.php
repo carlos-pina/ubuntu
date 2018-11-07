@@ -39,7 +39,19 @@
                         <div class="form-group row">
                           <label for="documentType" class="col-sm-2 col-form-label">Document Type</label>
                           <div class="col-sm-5">
-                            <select class="form-control" id="documentType" name="documentType"></select>
+                            <select class="form-control" id="documentType" name="documentType">
+                              <option value=""></option>
+                              @foreach ($documents as $document)
+                                @if ($people->documentType == $document->id)
+                                  <option value="{{ $document->id }}" selected>{{ $document->document }}</option>
+                                @else
+                                  <option value="{{ $document->id }}">{{ $document->document }}</option>
+                                @endif
+                              @endforeach
+                            </select>
+                            @if($errors->has('documentType'))
+                              <em class="help-block text-danger">{{ $errors->first('documentType') }}</em>
+                            @endif
                           </div>
                         </div>
                         <div class="form-group row">

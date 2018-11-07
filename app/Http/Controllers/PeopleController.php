@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\People;
+use App\DocumentTypes;
 use Illuminate\Http\Request;
 
 class PeopleController extends Controller
@@ -24,7 +25,8 @@ class PeopleController extends Controller
      */
     public function create()
     {
-        return view('people.create');
+        $documents = DocumentTypes::all();
+        return view('people.create', compact('documents'));
     }
 
     /**
@@ -38,6 +40,7 @@ class PeopleController extends Controller
         $this->validate(request(),[
             'name' => 'required',
             'lastname' => 'required',
+            'documentType' => 'required',
             'document' => 'required',
             'phone' => 'required'
         ]);
@@ -46,7 +49,7 @@ class PeopleController extends Controller
         $people->user_id = $request['userid'];
         $people->name = $request['name'];
         $people->lastname = $request['lastname'];
-        $people->documentType = 1; //$request['documentType'];
+        $people->documentType = $request['documentType'];
         $people->document = $request['document'];
         $people->phone = $request['phone'];
         $people->email = $request['email'];
@@ -76,7 +79,8 @@ class PeopleController extends Controller
      */
     public function edit(People $people)
     {
-        return view('people.edit')->with('people', $people);
+        $documents = DocumentTypes::all();
+        return view('people.edit', compact('people', 'documents'));
     }
 
     /**
@@ -91,6 +95,7 @@ class PeopleController extends Controller
         $this->validate(request(),[
             'name' => 'required',
             'lastname' => 'required',
+            'documentType' => 'required',
             'document' => 'required',
             'phone' => 'required'
         ]);
@@ -98,7 +103,7 @@ class PeopleController extends Controller
         $people->user_id = $request['userid'];
         $people->name = $request['name'];
         $people->lastname = $request['lastname'];
-        $people->documentType = 1; //$request['documentType'];
+        $people->documentType = $request['documentType'];
         $people->document = $request['document'];
         $people->phone = $request['phone'];
         $people->email = $request['email'];
