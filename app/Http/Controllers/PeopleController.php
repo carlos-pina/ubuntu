@@ -37,25 +37,8 @@ class PeopleController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate(request(),[
-            'name' => 'required',
-            'lastname' => 'required',
-            'documentType' => 'required',
-            'document' => 'required',
-            'phone' => 'required'
-        ]);
-
         $people = new People();
-        $people->user_id = $request['userid'];
-        $people->name = $request['name'];
-        $people->lastname = $request['lastname'];
-        $people->documentType = $request['documentType'];
-        $people->document = $request['document'];
-        $people->phone = $request['phone'];
-        $people->email = $request['email'];
-        $people->documentFile = $request['documentFile'];
-
-        $people->save();
+        $this->ValidateAndSave($request, $people);
 
         return redirect('home');
     }
@@ -92,24 +75,7 @@ class PeopleController extends Controller
      */
     public function update(Request $request, People $people)
     {
-        $this->validate(request(),[
-            'name' => 'required',
-            'lastname' => 'required',
-            'documentType' => 'required',
-            'document' => 'required',
-            'phone' => 'required'
-        ]);
-
-        $people->user_id = $request['userid'];
-        $people->name = $request['name'];
-        $people->lastname = $request['lastname'];
-        $people->documentType = $request['documentType'];
-        $people->document = $request['document'];
-        $people->phone = $request['phone'];
-        $people->email = $request['email'];
-        $people->documentFile = $request['documentFile'];
-
-        $people->save();
+        $this->ValidateAndSave($request, $people);
 
         return redirect('home');
     }
@@ -123,5 +89,27 @@ class PeopleController extends Controller
     public function destroy(People $people)
     {
         //
+    }
+
+    private function ValidateAndSave(Request $request, People $people)
+    {
+      $this->validate(request(),[
+          'name' => 'required',
+          'lastname' => 'required',
+          'documentType' => 'required',
+          'document' => 'required',
+          'phone' => 'required'
+      ]);
+
+      $people->user_id = $request['userid'];
+      $people->name = $request['name'];
+      $people->lastname = $request['lastname'];
+      $people->documentType = $request['documentType'];
+      $people->document = $request['document'];
+      $people->phone = $request['phone'];
+      $people->email = $request['email'];
+      $people->documentFile = $request['documentFile'];
+
+      $people->save();
     }
 }

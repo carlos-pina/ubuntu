@@ -9,13 +9,14 @@ class DocumentTypesSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
-        $document = ['id' => 'CED', 'document' => 'Cedula de Ciudadania'];
-        DB::table('document_types')->insert($document);
-        $document = ['id' => 'CEX', 'document' => 'Cedula de Extranjeria'];
-        DB::table('document_types')->insert($document);
-        $document = ['id' => 'PAS', 'document' => 'Pasaporte'];
-        DB::table('document_types')->insert($document);
-    }
+     public function run()
+     {
+         DB::table('document_types')->truncate();
+
+         DB::table('document_types')->insert(array (
+           0 => array ('id' => 'CED', 'document' => 'Cedula de Ciudadania'),
+           1 => array ('id' => 'CEX', 'document' => 'Cedula de Extranjeria'),
+           2 => array ('id' => 'PAS', 'document' => 'Pasaporte')
+         ));
+     }
 }

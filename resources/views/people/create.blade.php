@@ -39,7 +39,7 @@
                           <label for="documentType" class="col-sm-2 col-form-label">Document Type</label>
                           <div class="col-sm-5">
                             <select class="form-control" id="documentType" name="documentType">
-                              <option value=""></option>
+                              <option value="">--- Select Document Type ---</option>
                               @foreach ($documents as $document)
                                 @if (old('documentType') == $document->id)
                                   <option value="{{ $document->id }}" selected>{{ $document->document }}</option>

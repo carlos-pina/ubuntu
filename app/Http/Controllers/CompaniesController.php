@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Company;
+use App\Companies;
+use App\DocumentTypes;
+use App\Services;
+use App\ServiceDetails;
 use Illuminate\Http\Request;
 
-class CompanyController extends Controller
+class CompaniesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +27,10 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view('company.create');
+        $documents = DocumentTypes::all();
+        $services = Services::all();
+        $serviceDetails = ServiceDetails::all();
+        return view('companies.create', compact('documents', 'services', 'serviceDetails'));
     }
 
     /**
@@ -39,8 +45,8 @@ class CompanyController extends Controller
           //put fields to be validated here
         ]);
 
-        $company = new Company();
-        $company->user_id = $request['userid'];
+        $companies = new Companies();
+        $companies->user_id = $request['userid'];
         // $people->name = $request['name'];
         // $people->lastname = $request['lastname'];
         // $people->documentType = 1; //$request['documentType'];
@@ -49,7 +55,7 @@ class CompanyController extends Controller
         // $people->email = $request['email'];
         // $people->documentFile = $request['documentFile'];
 
-        $company->save();
+        $companies->save();
 
         return redirect('home');
     }
@@ -57,10 +63,10 @@ class CompanyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Company  $company
+     * @param  \App\Companies  $company
      * @return \Illuminate\Http\Response
      */
-    public function show(Company $company)
+    public function show(Companies $companies)
     {
         //
     }
@@ -68,28 +74,28 @@ class CompanyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Company  $company
+     * @param  \App\Companies  $companies
      * @return \Illuminate\Http\Response
      */
-    public function edit(Company $company)
+    public function edit(Companies $companies)
     {
-        return view('company.edit')->with('company', $company);
+        return view('companies.edit')->with('companies', $companies);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Company  $company
+     * @param  \App\Companies  $companies
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Company $company)
+    public function update(Request $request, Companies $companies)
     {
         $this->validate(request(),[
           //put fields to be validated here
         ]);
 
-        $company->user_id = $request['userid'];
+        $companies->user_id = $request['userid'];
         // $people->name = $request['name'];
         // $people->lastname = $request['lastname'];
         // $people->documentType = 1; //$request['documentType'];
@@ -98,7 +104,7 @@ class CompanyController extends Controller
         // $people->email = $request['email'];
         // $people->documentFile = $request['documentFile'];
 
-        $company->save();
+        $companies->save();
 
         return redirect('home');
     }
@@ -106,10 +112,10 @@ class CompanyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Company  $company
+     * @param  \App\Companies $companies
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Company $company)
+    public function destroy(Companies $companies)
     {
         //
     }
