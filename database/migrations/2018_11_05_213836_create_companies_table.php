@@ -21,10 +21,11 @@ class CreateCompaniesTable extends Migration
             $table->string('documentType', 3);
             $table->string('document');
             $table->string('phone');
+            $table->string('address');
             $table->string('email')->nullable();
             $table->string('description');
             $table->string('activities');
-            $table->string('address');
+            $table->string('serviceDetail');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Companies;
 use App\DocumentTypes;
 use App\Services;
-use App\ServiceDetails;
 use Illuminate\Http\Request;
 
 class CompaniesController extends Controller
@@ -29,8 +28,7 @@ class CompaniesController extends Controller
     {
         $documents = DocumentTypes::all();
         $services = Services::all();
-        $serviceDetails = ServiceDetails::all();
-        return view('companies.create', compact('documents', 'services', 'serviceDetails'));
+        return view('companies.create', compact('documents', 'services'));
     }
 
     /**
@@ -41,21 +39,8 @@ class CompaniesController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate(request(),[
-          //put fields to be validated here
-        ]);
-
         $companies = new Companies();
-        $companies->user_id = $request['userid'];
-        // $people->name = $request['name'];
-        // $people->lastname = $request['lastname'];
-        // $people->documentType = 1; //$request['documentType'];
-        // $people->document = $request['document'];
-        // $people->phone = $request['phone'];
-        // $people->email = $request['email'];
-        // $people->documentFile = $request['documentFile'];
-
-        $companies->save();
+        $this->ValidateAndSave($request, $companies);
 
         return redirect('home');
     }
@@ -79,7 +64,8 @@ class CompaniesController extends Controller
      */
     public function edit(Companies $companies)
     {
-        return view('companies.edit')->with('companies', $companies);
+        $documents = DocumentTypes::all();
+        return view('companies.edit', compact('companies', 'documents'));
     }
 
     /**
@@ -91,20 +77,7 @@ class CompaniesController extends Controller
      */
     public function update(Request $request, Companies $companies)
     {
-        $this->validate(request(),[
-          //put fields to be validated here
-        ]);
-
-        $companies->user_id = $request['userid'];
-        // $people->name = $request['name'];
-        // $people->lastname = $request['lastname'];
-        // $people->documentType = 1; //$request['documentType'];
-        // $people->document = $request['document'];
-        // $people->phone = $request['phone'];
-        // $people->email = $request['email'];
-        // $people->documentFile = $request['documentFile'];
-
-        $companies->save();
+        $this->ValidateAndSave($request, $companies);
 
         return redirect('home');
     }
@@ -118,5 +91,35 @@ class CompaniesController extends Controller
     public function destroy(Companies $companies)
     {
         //
+    }
+
+    private function ValidateAndSave(Request $request, Companies $companies)
+    {
+        $this->validate(request(),[
+            'name' => 'required',
+            'owner' => 'required',
+            'documentType' => 'required',
+            'document' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+            'description' => 'required',
+            'activities' => 'required',
+            'serviceDetails' => 'required'
+        ]);
+
+
+        $companies->user_id = $request['userid'];
+        $companies->name = $request['name'];
+        $companies->owner = $request['owner'];
+        $companies->documentType = $request['documentType'];
+        $companies->document = $request['document'];
+        $companies->phone = $request['phone'];
+        $companies->email = $request['email'];
+        $companies->address = $request['address'];
+        $companies->description = $request['description'];
+        $companies->activities = $request['activities'];
+        $companies->serviceDetail = $request['serviceDetails'];
+
+        $companies->save();
     }
 }

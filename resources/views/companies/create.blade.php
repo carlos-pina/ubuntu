@@ -78,6 +78,33 @@
                           </div>
                         </div>
                         <div class="form-group row">
+                          <label for="address" class="col-sm-2 col-form-label">Address</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Address" value="{{ old('address') }}"/>
+                            @if($errors->has('address'))
+                              <em class="help-block text-danger">{{ $errors->first('address') }}</em>
+                            @endif
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="description" class="col-sm-2 col-form-label">Description</label>
+                          <div class="col-sm-10">
+                            <textarea class="form-control" id="description" name="description" placeholder="Description" value="{{ old('description') }}"></textarea>
+                            @if($errors->has('description'))
+                              <em class="help-block text-danger">{{ $errors->first('description') }}</em>
+                            @endif
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="activities" class="col-sm-2 col-form-label">Activities</label>
+                          <div class="col-sm-10">
+                            <textarea class="form-control" id="activities" name="activities" placeholder="Activities" value="{{ old('activities') }}"></textarea>
+                            @if($errors->has('activities'))
+                              <em class="help-block text-danger">{{ $errors->first('activities') }}</em>
+                            @endif
+                          </div>
+                        </div>
+                        <div class="form-group row">
                           <label for="service" class="col-sm-2 col-form-label">Service</label>
                           <div class="col-sm-10">
                             <select class="form-control" id="service" name="service">
@@ -98,16 +125,7 @@
                         <div class="form-group row">
                           <label for="serviceDetails" class="col-sm-2 col-form-label">Service Details</label>
                           <div class="col-sm-10">
-                            <select class="form-control" id="serviceDetails" name="serviceDetails">
-                              <option value="">--- Select Service Detail ---</option>
-                              @foreach ($serviceDetails as $detail)
-                                @if (old('serviceDetails') == $detail->id)
-                                  <option value="{{ $detail->id }}" selected>{{ $detail->description }}</option>
-                                @else
-                                  <option value="{{ $detail->id }}">{{ $detail->description }}</option>
-                                @endif
-                              @endforeach
-                            </select>
+                            <select class="form-control" id="serviceDetails" name="serviceDetails"></select>
                             @if($errors->has('serviceDetails'))
                               <em class="help-block text-danger">{{ $errors->first('serviceDetails') }}</em>
                             @endif
@@ -124,4 +142,26 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('personalscripts')
+    <script>
+    $(function() {
+        $('select[name=service]').change(function() {
+
+            var url = '/serviceDetails/' + $(this).val();
+
+            $.get(url, function(data) {
+                var select = $('form select[name= serviceDetails]');
+
+                select.empty();
+                select.append('<option value="">--- Select Service Detail ---</option>');
+                $.each(data, function(key, value) {
+                    select.append('<option value=' + value.id + '>' + value.description + '</option>');
+                });
+            });
+        });
+    });
+
+    </script>
 @endsection
